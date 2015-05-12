@@ -280,6 +280,15 @@ var ContainerView = View.extend(MutableArray, {
 
   objectAt(idx) {
     return get(this, 'childViews')[idx];
+  },
+
+  _willDestroyElement() {
+    var childViews = get(this, 'childViews');
+    if (childViews) {
+      for (var i = 0; i < childViews.length; i++) {
+        this.renderer.willDestroyElement(childViews[i]);
+      }
+    }
   }
 });
 
